@@ -3,7 +3,7 @@
 angular.module('readerboardPlannerApp')
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'planner',
       'link': '/'
     }];
 
