@@ -25,11 +25,13 @@ header#banner.hero-unit
           .col-sm-6
             h2 letter supply:
           .col-sm-6
-            div.well.well-sm.out-of(ng-show='atLeastOneLetterIsOut')
-              h4 out of:
+            div.well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
+              h4 no more:
               ul
                 li
-                  span.out-of-letters(ng-repeat='noMoreLetter in noMoreLetters') {{noMoreLetter.character}}
+                  span.no-more-letters(ng-repeat='noMoreLetter in noMoreLetters')
+                    span {{noMoreLetter.character}}
+                    span(ng-show='showComma(noMoreLetter, noMoreLetters)') ,
         .row
           ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
             .col-xs-12.col-sm-6.col-md-4

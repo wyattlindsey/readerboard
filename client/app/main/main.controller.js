@@ -134,6 +134,14 @@ angular.module('readerboardPlannerApp')
       }
     };
 
+    $scope.showComma = function(letter, arrayOfLetters) {
+      if (arrayOfLetters.length > 1 && (letter !== _.last(arrayOfLetters))) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   });
 
   /**
