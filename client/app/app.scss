@@ -21,6 +21,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'modal/modal.scss';
 // endinjector
 
+a:hover {
+  text-decoration: none;
+}
+
 #banner {
   margin-top: $navbar-height;
 }
@@ -57,4 +61,11 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     font-weight: 700;
     padding-bottom: 5px;
   }
+}
+
+#github-navbar-link {
+  i {
+    margin-top: 12px;
+  }
+
 }
