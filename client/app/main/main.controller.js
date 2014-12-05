@@ -75,6 +75,9 @@ angular.module('readerboardPlannerApp')
 
       if (!$scope.textAreaData.length) {
         $scope.textAreaData = '';
+        $scope.availability = {
+          color: 'black'
+        }
       }
 
 
@@ -101,7 +104,7 @@ angular.module('readerboardPlannerApp')
           // check to see if it matches one of the miscCharacters
           _.forEach($scope.miscCharacters, function(miscCharacter) {
             if (letter === miscCharacter) {
-              $scope.readerBoardText += '\n';
+              $scope.readerBoardText += letter;
 
             }
           });
