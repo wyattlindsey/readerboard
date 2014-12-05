@@ -125,7 +125,7 @@ angular.module('readerboardPlannerApp')
     $scope.setColor = function(letter) {
       if (letter.available >= 0) {
         return {
-          'color': 'green'
+          'color': '#568B56'
         };
       } else {
         return {
