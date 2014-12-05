@@ -3,9 +3,10 @@
 angular.module('readerboardPlannerApp')
   .controller('MainCtrl', function ($scope, $http) {
 
-    $scope.textAreaData = '';
+    $scope.textInput = '';
     $scope.readerBoardText = '';
     $scope.readerBoardLetters = [];
+    $scope.noMoreLetters = [];
     $scope.miscCharacters = [
       ' ',
       '\n'
@@ -31,12 +32,14 @@ angular.module('readerboardPlannerApp')
                 letter.character = letter.character.toUpperCase();
               }
 
-              // set available number of letters to the default
-              $scope.resetAvailableLetters();
+              if(isNaN(letter.quantity)) {
+                letter.quantity = 0;
+              }
+
             });
 
-            // sort the array
-//            $scope.readerBoardLetters = _.sortBy($scope.readerBoardLetters, 'character');
+            // set available number of letters to the default
+            $scope.resetAvailableLetters();
 
             // make sure there are no duplicates
             $scope.readerBoardLetters = _.uniq($scope.readerBoardLetters, 'character');
@@ -65,17 +68,17 @@ angular.module('readerboardPlannerApp')
        * tabs on the available letters by reducing the default number for each match
        */
 
-    $scope.textAreaChanged = function() {
+    $scope.textInputChanged = function() {
 
       $scope.resetAvailableLetters();
       $scope.readerBoardText = '';
 
-      if (!$scope.textAreaData.length) {
-        $scope.textAreaData = '';
+      if (!$scope.textInput.length) {
+        $scope.textInput = '';
       }
 
 
-      _.forEach($scope.textAreaData, function(letter) {
+      _.forEach($scope.textInput, function(letter) {
         var matchingLetter = _.find($scope.readerBoardLetters,
                                       { 'character': letter.toUpperCase() });
         if (typeof matchingLetter != 'undefined') {
@@ -85,6 +88,9 @@ angular.module('readerboardPlannerApp')
         if (typeof matchingLetter != 'undefined' && matchingLetter.available >= 0) {
           // letter is one of the available letters and there are still more left
           $scope.readerBoardText += letter;
+          if (matchingLetter.available === 0) {
+            $scope.noMoreLetters.push(matchingLetter.character);
+          }
         } else {
           // check to see if it matches one of the miscCharacters
           _.forEach($scope.miscCharacters, function(miscCharacter) {

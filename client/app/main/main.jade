@@ -10,8 +10,8 @@ header#banner.hero-unit
         .col-md-5
           h2 message:
           textarea.form-control.message(rows='5',
-            ng-model='textAreaData',
-            ng-change='textAreaChanged()',
+            ng-model='textInput',
+            ng-change='textInputChanged()',
             ng-trim="false",
             onkeydown='return stopTab(event);')
         .col-md-5.col-md-offset-2
