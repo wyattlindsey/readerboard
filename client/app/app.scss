@@ -37,6 +37,11 @@ a:hover {
   background: url('../assets/images/readerboard_hero.jpg');
   background-repeat: no-repeat;
   background-color: darken($brand-primary, 8%);
+
+  h1 {
+    font-size: 80px;
+    color: $brand-success;
+  }
 }
 
 .text-fields {

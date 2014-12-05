@@ -31,7 +31,7 @@ header#banner.hero-unit
                 li
                   span.no-more-letters(ng-repeat='noMoreLetter in noMoreLetters')
                     span {{noMoreLetter.character}}
-                    span(ng-show='showComma(noMoreLetter, noMoreLetters)') ,
+                    span(ng-show='showComma(noMoreLetter, noMoreLetters)') &nbsp,
         .row
           ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
             .col-xs-12.col-sm-6.col-md-4

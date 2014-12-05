@@ -81,8 +81,13 @@ angular.module('readerboardPlannerApp')
 
       _.forEach($scope.textInput, function(letter) {
 
+        // first capitalize if it's a letter
+        if (/[a-z]/.test(letter)) {
+          letter = letter.toUpperCase();
+        }
+
         var matchingLetter = _.find($scope.readerBoardLetters,
-                                      { 'character': letter.toUpperCase() });
+                                      { 'character': letter });
 
         if (typeof matchingLetter != 'undefined') {
 
@@ -95,7 +100,6 @@ angular.module('readerboardPlannerApp')
             // de-duplicate the array
             $scope.noMoreLetters = _.uniq($scope.noMoreLetters, 'character');
           }
-
 
         }
 
