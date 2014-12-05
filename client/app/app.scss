@@ -24,3 +24,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 #banner {
   margin-top: $navbar-height;
 }
+
+.letter-availability-list {
+  font-size: 18px;
+  li {
+    list-style: none;
+  }
+}

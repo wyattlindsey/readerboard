@@ -19,6 +19,11 @@ header#banner.hero-unit
             h2.b {{readerBoardText}}
       .row
           h2 your letter supply:
+          .letter-availability-list
+
+              ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
+                .col-md-4
+                  li <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
 
 
 footer.footer
