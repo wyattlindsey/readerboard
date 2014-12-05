@@ -27,7 +27,7 @@ header#banner.hero-unit
 
               ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
                 .col-md-4
-                  li(ng-style='availability') <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
+                  li(ng-style='setColor(readerBoardLetter)') <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
 
 
 footer.footer

@@ -10,9 +10,6 @@ angular.module('readerboardPlannerApp')
       ' ',
       '\n'
     ];
-    $scope.availability = {
-      color: 'black'
-    };
 
     $('.message').focus();
 
@@ -75,9 +72,6 @@ angular.module('readerboardPlannerApp')
 
       if (!$scope.textAreaData.length) {
         $scope.textAreaData = '';
-        $scope.availability = {
-          color: 'black'
-        }
       }
 
 
@@ -86,15 +80,6 @@ angular.module('readerboardPlannerApp')
                                       { 'character': letter.toUpperCase() });
         if (typeof matchingLetter != 'undefined') {
           matchingLetter.available--;
-          if (matchingLetter.available < 0) {
-            $scope.availability = {
-              color: 'red'
-            }
-          } else {
-            $scope.availability = {
-              color: 'black'
-            }
-          }
         }
 
         if (typeof matchingLetter != 'undefined' && matchingLetter.available >= 0) {
@@ -113,14 +98,23 @@ angular.module('readerboardPlannerApp')
 
     };
 
-      /**
-       * stopTab() - prevent user from tabbing all over the place
-       */
-
-
-
+    $scope.setColor = function(letter) {
+      if (letter.available >= 0) {
+        return {
+          color: 'black'
+        };
+      } else {
+        return {
+          color: 'red'
+        };
+      }
+    };
 
   });
+
+  /**
+   * stopTab() - prevent user from tabbing all over the place
+   */
 
 var stopTab = function(e) {
   var evt = e || window.event
