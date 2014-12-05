@@ -101,11 +101,11 @@ angular.module('readerboardPlannerApp')
     $scope.setColor = function(letter) {
       if (letter.available >= 0) {
         return {
-          color: 'black'
+          'color': 'green'
         };
       } else {
         return {
-          color: 'red'
+          'color': 'red'
         };
       }
     };

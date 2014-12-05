@@ -20,14 +20,14 @@ header#banner.hero-unit
             readonly,
             ng-model='readerBoardText',
             ng-trim="false")
-      .row
+      .row.letter-availability-list
           hr
           h2 letter supply:
-          .letter-availability-list
-
-              ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
-                .col-md-4
-                  li(ng-style='setColor(readerBoardLetter)') <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
+          ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
+            .col-xs-12.col-sm-6.col-md-4
+              li
+                .col-xs-4.col-xs-push-2.col-md-2.col-md-push-0 <b>{{readerBoardLetter.character}}</b>
+                .col-xs-4.col-xs-push-2.col-md-3.col-md-pull-0.number-available(ng-style='setColor(readerBoardLetter)') &nbsp {{readerBoardLetter.available}}
 
 
 footer.footer

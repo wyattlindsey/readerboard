@@ -38,8 +38,14 @@ a:hover {
 .letter-availability-list {
   font-size: 18px;
   color: 'black';
+  h2 {
+    margin-left: 16px;
+  }
   li {
     list-style: none;
+    .number-available {
+      text-align: right;
+    }
   }
 }
 
@@ -68,4 +74,13 @@ a:hover {
     margin-top: 12px;
   }
 
+}
+
+@media screen and (max-width: $screen-sm-max) {
+  .letter-availability-list {
+    li {
+      .number-available {
+      }
+    }
+  }
 }
