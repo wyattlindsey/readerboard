@@ -9,7 +9,7 @@ angular.module('readerboardPlannerApp', [
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/404');
 
     $locationProvider.html5Mode(true);
   });
