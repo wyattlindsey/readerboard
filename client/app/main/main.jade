@@ -6,25 +6,29 @@ header#banner.hero-unit
     p.lead Plan your readerboard message based on letters in your inventory.
 
 .container(ng-controller='MainCtrl')
-  .row
-      h2.page-header your message:
-      .row
+      .row.text-fields
         .col-md-5
-          textarea.form-control.message(rows='3',
+          h2 message:
+          textarea.form-control.message(rows='5',
             ng-model='textAreaData',
             ng-change='textAreaChanged()',
             ng-trim="false")
         .col-md-5.col-md-offset-2
-          .well
-            h2.b {{readerBoardText}}
+          h2 preview:
+          textarea.form-control.well.reader-board-preview(rows='3',
+            readonly,
+            ng-model='readerBoardText',
+            ng-trim="false")
       .row
-          h2 your letter supply:
+          hr
+          h2 letter supply:
           .letter-availability-list
 
               ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
                 .col-md-4
-                  li <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
+                  li(ng-style='availability') <b>{{readerBoardLetter.character}} :</b> {{readerBoardLetter.available}}
 
 
 footer.footer
   .container
+    .footer-copyright © 2014 Wyatt Lindsey, all rights reserved

@@ -6,6 +6,13 @@ angular.module('readerboardPlannerApp')
     $scope.textAreaData = '';
     $scope.readerBoardText = '';
     $scope.readerBoardLetters = [];
+    $scope.miscCharacters = [
+      ' ',
+      '\n'
+    ];
+    $scope.availability = {
+      color: 'black'
+    };
 
     $('.message').focus();
 
@@ -56,12 +63,12 @@ angular.module('readerboardPlannerApp')
     };
 
       /**
-       * checkLetters() - every time the textArea is updated this function iterates through
+       * textAreaChanged() - every time the textArea is updated this function iterates through
        * the characters in the area, does some logic to clean up the results and also keeps
        * tabs on the available letters by reducing the default number for each match
        */
 
-    $scope.checkLetters = function() {
+    $scope.textAreaChanged = function() {
 
       $scope.resetAvailableLetters();
       $scope.readerBoardText = '';
@@ -71,26 +78,36 @@ angular.module('readerboardPlannerApp')
       }
 
 
-
       _.forEach($scope.textAreaData, function(letter) {
         var matchingLetter = _.find($scope.readerBoardLetters,
                                       { 'character': letter.toUpperCase() });
         if (typeof matchingLetter != 'undefined') {
           matchingLetter.available--;
+          if (matchingLetter.available < 0) {
+            $scope.availability = {
+              color: 'red'
+            }
+          } else {
+            $scope.availability = {
+              color: 'black'
+            }
+          }
         }
 
-        if ((typeof matchingLetter != 'undefined' && matchingLetter.available >= 0)
-            || letter === ' ') {
+        if (typeof matchingLetter != 'undefined' && matchingLetter.available >= 0) {
+          // letter is one of the available letters and there are still more left
+          $scope.readerBoardText += letter;
+        } else {
+          // check to see if it matches one of the miscCharacters
+          _.forEach($scope.miscCharacters, function(miscCharacter) {
+            if (letter === miscCharacter) {
+              $scope.readerBoardText += '\n';
 
-              $scope.readerBoardText += letter;
+            }
+          });
         }
       });
 
-    };
-
-    $scope.textAreaChanged = function() {
-      $scope.checkLetters();
-//      $scope.readerBoardText = $scope.textAreaData;
     };
 
 

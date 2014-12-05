@@ -25,9 +25,30 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   margin-top: $navbar-height;
 }
 
+.text-fields {
+  h2 {
+    margin-bottom: 15px;
+  }
+}
+
 .letter-availability-list {
   font-size: 18px;
+  color: 'black';
   li {
     list-style: none;
+  }
+}
+
+.reader-board-preview {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.footer {
+  max-height: 60px;
+  .footer-copyright {
+    font-size: 12px;
+    font-weight: 700;
+    padding-bottom: 5px;
   }
 }
