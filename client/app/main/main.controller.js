@@ -113,5 +113,20 @@ angular.module('readerboardPlannerApp')
 
     };
 
+      /**
+       * stopTab() - prevent user from tabbing all over the place
+       */
+
+
+
 
   });
+
+var stopTab = function(e) {
+  var evt = e || window.event
+  if ( evt.keyCode === 9 ) {
+    return false
+  }
+};
+
+

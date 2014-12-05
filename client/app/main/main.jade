@@ -12,7 +12,8 @@ header#banner.hero-unit
           textarea.form-control.message(rows='5',
             ng-model='textAreaData',
             ng-change='textAreaChanged()',
-            ng-trim="false")
+            ng-trim="false",
+            onkeydown='return stopTab(event);')
         .col-md-5.col-md-offset-2
           h2 preview:
           textarea.form-control.well.reader-board-preview(
