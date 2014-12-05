@@ -38,6 +38,7 @@ a:hover {
 .letter-availability-list {
   font-size: 18px;
   color: 'black';
+  margin-top: 36px;
   h2 {
     margin-left: 16px;
   }
@@ -58,6 +59,15 @@ a:hover {
   font-weight: 700;
   text-align: center;
   min-height: 200px;
+}
+
+.out-of {
+  padding-left: 18px;
+  .out-of-letters{
+    color: red;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 .footer {

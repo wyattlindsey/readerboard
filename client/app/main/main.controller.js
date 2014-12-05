@@ -7,6 +7,7 @@ angular.module('readerboardPlannerApp')
     $scope.readerBoardText = '';
     $scope.readerBoardLetters = [];
     $scope.noMoreLetters = [];
+    $scope.atLeastOneLetterIsOut = false;
     $scope.miscCharacters = [
       ' ',
       '\n'
@@ -69,9 +70,9 @@ angular.module('readerboardPlannerApp')
        */
 
     $scope.textInputChanged = function() {
-
       $scope.resetAvailableLetters();
       $scope.readerBoardText = '';
+      $scope.noMoreLetters.length = 0;
 
       if (!$scope.textInput.length) {
         $scope.textInput = '';
@@ -79,18 +80,30 @@ angular.module('readerboardPlannerApp')
 
 
       _.forEach($scope.textInput, function(letter) {
+
         var matchingLetter = _.find($scope.readerBoardLetters,
                                       { 'character': letter.toUpperCase() });
+
         if (typeof matchingLetter != 'undefined') {
+
+          // decrement availability for each letter used
           matchingLetter.available--;
+
+          // keep track of which letters have been used up
+          if (matchingLetter.available <= 0) {
+            $scope.noMoreLetters.push(matchingLetter);
+            // de-duplicate the array
+            $scope.noMoreLetters = _.uniq($scope.noMoreLetters, 'character');
+          }
+
+
         }
+
+
 
         if (typeof matchingLetter != 'undefined' && matchingLetter.available >= 0) {
           // letter is one of the available letters and there are still more left
           $scope.readerBoardText += letter;
-          if (matchingLetter.available === 0) {
-            $scope.noMoreLetters.push(matchingLetter.character);
-          }
         } else {
           // check to see if it matches one of the miscCharacters
           _.forEach($scope.miscCharacters, function(miscCharacter) {
@@ -102,6 +115,11 @@ angular.module('readerboardPlannerApp')
         }
       });
 
+      if ($scope.noMoreLetters.length > 0) {
+        $scope.atLeastOneLetterIsOut = true;
+      } else {
+        $scope.atLeastOneLetterIsOut = false;
+      }
     };
 
     $scope.setColor = function(letter) {

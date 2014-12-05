@@ -22,7 +22,15 @@ header#banner.hero-unit
             ng-trim="false")
       .row.letter-availability-list
           hr
-          h2 letter supply:
+          .col-sm-6
+            h2 letter supply:
+          .col-sm-6
+            div.well.well-sm.out-of(ng-show='atLeastOneLetterIsOut')
+              h4 out of:
+              ul
+                li
+                  span.out-of-letters(ng-repeat='noMoreLetter in noMoreLetters') {{noMoreLetter.character}}
+        .row
           ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
             .col-xs-12.col-sm-6.col-md-4
               li
@@ -33,6 +41,6 @@ header#banner.hero-unit
 footer.footer
   .container
     .footer-copyright
-      a(href='https://github.com/wyattlindsey/leaderboard-planner', target='_blank')
+      a(href='https://github.com/wyattlindsey/readerboard', target='_blank')
         i.fa.fa-github &nbsp <b>ReaderBoard</b>
       span &nbsp ©2014 Wyatt Lindsey
