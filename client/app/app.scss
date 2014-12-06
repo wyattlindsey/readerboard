@@ -34,14 +34,30 @@ a:hover {
 #banner {
   margin-top: $navbar-height;
   height: 400px;
-  background: url('../assets/images/readerboard_hero.jpg');
+  background-position: center;
+  background-image: url('../assets/images/readerboard_hero.jpg');
   background-repeat: no-repeat;
   background-color: darken($brand-primary, 8%);
-
-  h1 {
-    font-size: 80px;
-    color: $brand-success;
+  .hero-unit-text {
+    background-color: #fff;
+    border-radius: $border-radius-large;
+    opacity: 0.7;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding: 25px;
+    width: 800px;
+    h1 {
+      font-size: 80px;
+      color: $brand-success;
+      padding-bottom: 18px;
+    }
+    p {
+      color: $text-color;
+    }
   }
+
 }
 
 .text-fields {
@@ -110,5 +126,15 @@ a:hover {
       .number-available {
       }
     }
+  }
+
+  #banner {
+    .hero-unit-text {
+      width: 100%;
+      h1 {
+        font-size: 48px;
+      }
+    }
+
   }
 }
