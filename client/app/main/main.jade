@@ -26,7 +26,21 @@ header#banner.hero-unit
           .col-sm-6
             h2 letter supply:
           .col-sm-6
-            div.well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
+            .row.letter-supply-controls
+              .col-sm-6
+                .btn-group(dropdown)
+                  button.btn.btn-primary.btn-lg.dropdown-toggle(dropdown-toggle)
+                    i.fa.fa-pencil-square-o edit letter sets&nbsp
+                    .caret
+                  ul.dropdown-menu(role='menu')
+                    li One
+                    li Two
+                    li Three
+
+              .col-sm-6.pull-right
+                a.btn.btn-lg.btn-success(href='/letters')
+                  i.fa.fa-pencil-square-o &nbsp edit letter sets
+            .well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
               h4 no more:
               ul
                 li

@@ -19,10 +19,14 @@ describe('Controller: MainCtrl', function () {
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
     });
+
+    spyOn(scope, 'textInputChanged');
+
   }));
 
-  it('should attach a list of things to the scope', function () {
-    $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+  it('should call textInputChanged()', function() {
+    expect(scope.textInputChanged).toHaveBeenCalled();
   });
+
+
 });

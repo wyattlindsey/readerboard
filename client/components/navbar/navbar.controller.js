@@ -5,6 +5,10 @@ angular.module('readerboardPlannerApp')
     $scope.menu = [{
       'title': 'planner',
       'link': '/'
+    },
+    {
+      'title': 'letters',
+      'link': '/letters'
     }];
 
     $scope.isCollapsed = true;

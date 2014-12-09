@@ -23,6 +23,7 @@ $font-family-sans-serif:  "Open Sans", sans-serif !default;
 
 // Component styles are injected through grunt
 // injector
+@import 'letters/letters.scss';
 @import 'main/main.scss';
 @import 'modal/modal.scss';
 // endinjector
@@ -78,6 +79,9 @@ a:hover {
     .number-available {
       text-align: right;
     }
+  }
+  .btn {
+    margin-top: 18px;
   }
 }
 
