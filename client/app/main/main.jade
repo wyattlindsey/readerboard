@@ -32,8 +32,12 @@ header#banner.hero-unit
                   .dropdown.letter-set-selector
                     a.dropdown-toggle(data-toggle='dropdown', href='#', role='button') Letter Sets&nbsp
                       span.caret
+                    ul.dropdown-menu(role='menu')
+                      li(ng-repeat='item in fakeMenuItems')
+                        a(href='#') {{item}}
+
                 li
-                  a.btn.btn-lg(href='/letters', role='button')
+                  a(href='/letters', role='button')
                     i.fa.fa-pencil-square-o &nbsp edit letters
             .row
                 .well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')

@@ -13,6 +13,12 @@ angular.module('readerboardPlannerApp')
       '\n'
     ];
 
+    $scope.fakeMenuItems = [
+      'First item',
+      'Second item',
+      'Third item'
+    ];
+
     $('.message').focus();
 
       /**

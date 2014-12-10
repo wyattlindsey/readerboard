@@ -1,2 +1,13 @@
-.col-md-12
-    | This is the letters view.
+div(ng-include='"components/navbar/navbar.html"')
+
+header#banner.hero-unit
+  .container(ng-controller='LettersCtrl')
+    .row
+      .hero-unit-text
+        h1 ReaderBoard
+        p.lead Plan your readerboard message based on letters in your inventory.
+
+    .row.editor-buttons
+      .nav.nav-pills
+        button.btn.btn-lg.btn-success(role='button', ng-click='delete()') Create new set
+
