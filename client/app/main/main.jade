@@ -26,15 +26,15 @@ header#banner.hero-unit
           .col-sm-6
             h2 letter supply:
           .col-sm-6
-            .row
-              ul.letter-supply-controls.nav.nav-pills.pull-right
-                li
-                  a.btn.btn-lg.btn-success(href='/letters')
-                    i.fa.fa-pencil-square-o &nbsp edit letter sets
+            .row.letter-supply-controls
+              ul.nav.nav-pills.pull-right
                 li
                   .dropdown.letter-set-selector
-                    a.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-expanded='false') Letter Sets&nbsp
+                    a.dropdown-toggle(data-toggle='dropdown', href='#', role='button') Letter Sets&nbsp
                       span.caret
+                li
+                  a.btn.btn-lg(href='/letters', role='button')
+                    i.fa.fa-pencil-square-o &nbsp edit letters
             .row
                 .well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
                   h4 no more:

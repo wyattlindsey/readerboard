@@ -85,10 +85,16 @@ a:hover {
 
   .letter-supply-controls {
     margin-top: 20px;
+    font-size: 24px;
+
+    .btn {
+      font-size: 24px;
+    }
 
     li {
       margin-left: 18px;
       margin-right: 18px;
+
 
       .letter-set-selector {
         margin-top: 10px;
