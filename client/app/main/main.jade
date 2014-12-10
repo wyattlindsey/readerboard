@@ -26,27 +26,23 @@ header#banner.hero-unit
           .col-sm-6
             h2 letter supply:
           .col-sm-6
-            .row.letter-supply-controls
-              .col-sm-6
-                .btn-group(dropdown)
-                  button.btn.btn-primary.btn-lg.dropdown-toggle(dropdown-toggle)
-                    i.fa.fa-pencil-square-o edit letter sets&nbsp
-                    .caret
-                  ul.dropdown-menu(role='menu')
-                    li One
-                    li Two
-                    li Three
-
-              .col-sm-6.pull-right
-                a.btn.btn-lg.btn-success(href='/letters')
-                  i.fa.fa-pencil-square-o &nbsp edit letter sets
-            .well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
-              h4 no more:
-              ul
+            .row
+              ul.letter-supply-controls.nav.nav-pills.pull-right
                 li
-                  span.no-more-letters(ng-repeat='noMoreLetter in noMoreLetters')
-                    span {{noMoreLetter.character}}
-                    span(ng-show='showComma(noMoreLetter, noMoreLetters)') &nbsp,
+                  a.btn.btn-lg.btn-success(href='/letters')
+                    i.fa.fa-pencil-square-o &nbsp edit letter sets
+                li
+                  .dropdown.letter-set-selector
+                    a.dropdown-toggle(data-toggle='dropdown', href='#', role='button', aria-expanded='false') Letter Sets&nbsp
+                      span.caret
+            .row
+                .well.well-sm.no-more(ng-show='atLeastOneLetterIsOut')
+                  h4 no more:
+                  ul
+                    li
+                      span.no-more-letters(ng-repeat='noMoreLetter in noMoreLetters')
+                        span {{noMoreLetter.character}}
+                        span(ng-show='showComma(noMoreLetter, noMoreLetters)') &nbsp,
         .row
           ul.letter-availability-list(ng-repeat='readerBoardLetter in readerBoardLetters')
             .col-xs-12.col-sm-6.col-md-4

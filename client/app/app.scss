@@ -71,17 +71,29 @@ a:hover {
   font-size: 18px;
   color: 'black';
   margin-top: 36px;
+
   h2 {
     margin-left: 16px;
   }
+
   li {
     list-style: none;
     .number-available {
       text-align: right;
     }
   }
-  .btn {
-    margin-top: 18px;
+
+  .letter-supply-controls {
+    margin-top: 20px;
+
+    li {
+      margin-left: 18px;
+      margin-right: 18px;
+
+      .letter-set-selector {
+        margin-top: 10px;
+      }
+    }
   }
 }
 
