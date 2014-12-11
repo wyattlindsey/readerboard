@@ -3,7 +3,7 @@
 angular.module('readerboardPlannerApp')
   .controller('LettersCtrl', function ($scope, Modal) {
 
-    $scope.delete = Modal.confirm.delete(function() {
+    $scope.create = Modal.create(function() {
       console.log('test');
     });
   });

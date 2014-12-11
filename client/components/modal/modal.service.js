@@ -72,6 +72,45 @@ angular.module('readerboardPlannerApp')
             });
           };
         }
+      },
+
+      create: function() {
+
+        /**
+         * Open a creation modal
+         *
+         */
+
+        return function() {
+          var createModal;
+
+          createModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Create new set',
+              templateUrl: './components/modal/editor/createModal/createModal.html',
+              buttons: [{
+                classes: 'btn-success',
+                text: 'Create',
+                click: function(e) {
+                  createModal.close(e);
+                }
+              }, {
+                classes: 'btn-default',
+                text: 'Cancel',
+                click: function(e) {
+                  createModal.dismiss(e);
+                }
+              }]
+            }
+          }, 'modal-danger');
+
+          createModal.result.then(function(event) {
+//            del.apply(event, args);
+            console.log('done with the create modal');
+          });
+        };
       }
+
     };
   });
