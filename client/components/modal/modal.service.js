@@ -8,7 +8,7 @@ angular.module('readerboardPlannerApp')
      * @param  {String} modalClass - (optional) class(es) to be applied to the modal
      * @return {Object}            - the instance $modal.open() returns
      */
-    function openModal(scope, modalClass) {
+    function openModal(scope, modalClass, template) {
       var modalScope = $rootScope.$new();
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
@@ -16,8 +16,8 @@ angular.module('readerboardPlannerApp')
       angular.extend(modalScope, scope);
 
       return $modal.open({
-        templateUrl: 'components/modal/modal.html',
         windowClass: modalClass,
+        templateUrl: template,
         scope: modalScope
       });
     }
@@ -65,7 +65,7 @@ angular.module('readerboardPlannerApp')
                   }
                 }]
               }
-            }, 'modal-danger');
+            }, 'modal-danger', 'components/modal/modal.html');
 
             deleteModal.result.then(function(event) {
               del.apply(event, args);
@@ -88,7 +88,7 @@ angular.module('readerboardPlannerApp')
             modal: {
               dismissable: true,
               title: 'Create new set',
-              templateUrl: './components/modal/editor/createModal/createModal.html',
+              windowTemplateUrl: 'editor/createModal/createModal.html',
               buttons: [{
                 classes: 'btn-success',
                 text: 'Create',
@@ -103,11 +103,11 @@ angular.module('readerboardPlannerApp')
                 }
               }]
             }
-          }, 'modal-danger');
+          }, 'modal-default', 'components/modal/editor/createModal/createModal.html');
 
           createModal.result.then(function(event) {
 //            del.apply(event, args);
-            console.log('done with the create modal');
+            console.log('finished with the create modal');
           });
         };
       }
