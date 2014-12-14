@@ -1,1 +1,20 @@
-p Hello
+.modal-header
+  button.close(ng-if='modal.dismissable', type='button', ng-click='$dismiss()') &times;
+  h4.modal-title(ng-if='modal.title', ng-bind='modal.title')
+
+.container(ng-controller='CreateModalCtrl')
+  .row.add-letter-controls
+    .col-md-4
+      input.form-control(type='text', placeholder='type new character',
+        ng-model='newLetter.character', ng-change='')
+    .col-md-4
+      input.form-control(type='number', placeholder='1', ng-model='newLetter.qty')
+    .col-md-4
+      button.btn.btn-success(role='button', ng-click='addLetter(newLetter.character, newLetter.qty)') add letter
+  .row
+    div(ng-repeat='letter in letters')
+      div {{letter.character}}
+        span {{letter.qty}}
+
+.modal-footer
+  button.btn(ng-repeat='button in modal.buttons', ng-class='button.classes', ng-click='button.click($event)', ng-bind='button.text')

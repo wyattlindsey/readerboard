@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: createModalCtrl', function () {
+describe('Controller: CreateModalCtrl', function () {
 
   // load the controller's module
   beforeEach(module('readerboardPlannerApp'));
 
-  var createModalCtrl, scope;
+  var CreateModalCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    createModalCtrl = $controller('createModalCtrl', {
+    createModalCtrl = $controller('CreateModalCtrl', {
       $scope: scope
     });
   }));

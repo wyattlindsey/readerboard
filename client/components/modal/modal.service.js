@@ -8,16 +8,19 @@ angular.module('readerboardPlannerApp')
      * @param  {String} modalClass - (optional) class(es) to be applied to the modal
      * @return {Object}            - the instance $modal.open() returns
      */
-    function openModal(scope, modalClass, template) {
+    function openModal(scope, modalClass) {
       var modalScope = $rootScope.$new();
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
 
       angular.extend(modalScope, scope);
 
+      console.log(scope.modal.size);
+
       return $modal.open({
         windowClass: modalClass,
-        templateUrl: template,
+        templateUrl: scope.modal.template,
+        size: scope.modal.size,
         scope: modalScope
       });
     }
@@ -50,6 +53,7 @@ angular.module('readerboardPlannerApp')
               modal: {
                 dismissable: true,
                 title: 'Confirm Delete',
+                template: 'components/modal/modal.html',
                 html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
                 buttons: [{
                   classes: 'btn-danger',
@@ -65,7 +69,7 @@ angular.module('readerboardPlannerApp')
                   }
                 }]
               }
-            }, 'modal-danger', 'components/modal/modal.html');
+            }, 'modal-danger');
 
             deleteModal.result.then(function(event) {
               del.apply(event, args);
@@ -88,7 +92,9 @@ angular.module('readerboardPlannerApp')
             modal: {
               dismissable: true,
               title: 'Create new set',
-              windowTemplateUrl: 'editor/createModal/createModal.html',
+              template: 'components/modal/editor/createModal/createModal.html',
+              controller: './editor/createModal/CreateModelCtrl',
+              size: 'lg',
               buttons: [{
                 classes: 'btn-success',
                 text: 'Create',
@@ -103,7 +109,7 @@ angular.module('readerboardPlannerApp')
                 }
               }]
             }
-          }, 'modal-default', 'components/modal/editor/createModal/createModal.html');
+          }, 'modal-default');
 
           createModal.result.then(function(event) {
 //            del.apply(event, args);
