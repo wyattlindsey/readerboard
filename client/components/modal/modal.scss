@@ -23,3 +23,20 @@
 .modal-danger .modal-header {
   background: $brand-danger;
 }
+
+.add-letter-controls {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  .character-field {
+    max-width: 120px;
+    margin: 10px;
+  }
+  .qty-field {
+    max-width: 80px;
+    margin: 10px;
+  }
+  .add-letter-button {
+    margin: 10px;
+  }
+}

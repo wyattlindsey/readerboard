@@ -15,8 +15,6 @@ angular.module('readerboardPlannerApp')
 
       angular.extend(modalScope, scope);
 
-      console.log(scope.modal.size);
-
       return $modal.open({
         windowClass: modalClass,
         templateUrl: scope.modal.template,
@@ -113,7 +111,6 @@ angular.module('readerboardPlannerApp')
 
           createModal.result.then(function(event) {
 //            del.apply(event, args);
-            console.log('finished with the create modal');
           });
         };
       }
