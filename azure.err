@@ -1,0 +1,17 @@
+Thu Dec 18 2014 09:39:45 GMT-0800 (PST):
+{ [Error: ENOENT, no such file or directory 'help']
+  stack: [Getter/Setter],
+  errno: 34,
+  code: 'ENOENT',
+  path: 'help',
+  syscall: 'open',
+  __frame: undefined,
+  rawStack: [Getter] }
+Error: ENOENT, no such file or directory 'help'
+    at Object.fs.openSync (fs.js:432:18)
+    at Object.fs.readFileSync (fs.js:289:15)
+    at readFileContents (/usr/local/Cellar/node/0.10.4/lib/node_modules/azure-cli/lib/util/profile/publishSettings.js:28:23)
+    at Object.importPublishSettings [as import] (/usr/local/Cellar/node/0.10.4/lib/node_modules/azure-cli/lib/util/profile/publishSettings.js:91:13)
+    at Profile._.extend.importPublishSettings (/usr/local/Cellar/node/0.10.4/lib/node_modules/azure-cli/lib/util/profile/profile.js:193:34)
+    at __5 (/usr/local/Cellar/node/0.10.4/lib/node_modules/azure-cli/lib/commands/account._js:115:23)
+

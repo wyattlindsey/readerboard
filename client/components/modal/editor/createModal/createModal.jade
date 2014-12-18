@@ -12,9 +12,11 @@
       button.btn.btn-success.add-letter-button(role='button',
         ng-click='addLetter(newLetter.character, newLetter.qty)') add letter
   .row
-    div(ng-repeat='letter in letters')
-      div {{letter.character}}
-        span {{letter.qty}}
+    ul.letter-availability-list(ng-repeat='letter in letters')
+      .col-xs-12.col-sm-6.col-md-4
+        li
+          h2.col-xs-4.col-xs-push-2.col-md-2.col-md-push-0 <b>{{letter.character}}</b>
+          h2.list-qty.col-xs-4.col-xs-push-2.col-md-3.col-md-pull-0 {{letter.qty}}
 
 .modal-footer
   button.btn(ng-repeat='button in modal.buttons', ng-class='button.classes', ng-click='button.click($event)', ng-bind='button.text')

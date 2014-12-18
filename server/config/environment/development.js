@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://support:support@ds051170.mongolab.com:51170/contacts'
+    uri: 'mongodb://localhost/readerboard-planner-dev'
   },
 
   seedDB: true
