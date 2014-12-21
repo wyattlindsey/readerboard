@@ -17,7 +17,15 @@ angular.module('readerboardPlannerApp')
            character: character,
            qty: qty
          });
+         resetFields();
        }
+     };
+
+     var resetFields = function() {
+       $scope.newLetter = {
+         character: '',
+         qty: 1
+       };
      };
 
      /**
@@ -25,8 +33,15 @@ angular.module('readerboardPlannerApp')
       */
 
      $scope.characterFieldChanged = function() {
+       $scope.newLetter.character = _.last($scope.newLetter.character); // only the last typed character is held
+       // only allow unique characters
+       _.forEach($scope.letters, function(letter) {
+         if (letter.character == $scope.newLetter.character) {
+           resetFields();
+           return;
+         }
+       });
 
-       $scope.newLetter.character = _.last($scope.newLetter.character); // only allow unique characters
      };
 
      $scope.qtyFieldChanged = function() {
