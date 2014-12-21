@@ -37,7 +37,7 @@ describe('Create Modal', function() {
 
   it('should change quantities over 100 to 99', function() {
     qtyInput.sendKeys('500');
-    expect(qtyInput.getAttribute('value')).toEqual('99');
+    expect(qtyInput.getAttribute('value')).toEqual('100');
   });
 
   it('should add newly created letters to the list', function() {

@@ -55,9 +55,17 @@
     }
   }
 
-  .list-qty {
-    color: #568B56;
+  .set-item {
+    list-style: none;
+
+    .trash-icon {
+      line-height: 0px;
+    }
+    .list-qty {
+      color: #568B56;
+    }
   }
+
 }
 
 
