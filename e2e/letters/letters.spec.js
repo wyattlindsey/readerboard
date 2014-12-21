@@ -10,7 +10,7 @@ describe('Create Modal', function() {
   var characterInput = element(by.model('newLetter.character'));
   var qtyInput = element(by.model('newLetter.qty'));
   var addLetterButton = element(by.buttonText('add letter'));
-  var letterAvailabilityList = element.all(by.repeater('letter in letters'));
+  var letterAvailabilityList = element.all(by.repeater('letter in newSet'));
 
   beforeEach(function() {
     browser.get('/letters');

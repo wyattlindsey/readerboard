@@ -24,24 +24,40 @@
   background: $brand-danger;
 }
 
-.add-letter-controls {
-  padding-top: 16px;
-  padding-bottom: 16px;
+.modal-contents {
   text-align: center;
-  .character-field {
-    max-width: 120px;
-    margin: 10px;
+
+  .letter-set-title {
+    font-size: 32px;
+    text-align: center;
+    margin-top: 12px;
+    padding-bottom: 12px;
   }
-  .qty-field {
-    max-width: 80px;
-    margin: 10px;
+
+  .editable-text {
+    padding-top: 32px;
   }
-  .add-letter-button {
-    margin: 10px;
+
+  .add-letter-controls {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+    .character-field {
+      max-width: 120px;
+      margin: 10px;
+    }
+    .qty-field {
+      max-width: 80px;
+      margin: 10px;
+    }
+    .add-letter-button {
+      margin: 10px;
+    }
+  }
+
+  .list-qty {
+    color: #568B56;
   }
 }
 
-.list-qty {
-  color: #568B56;
 
-}

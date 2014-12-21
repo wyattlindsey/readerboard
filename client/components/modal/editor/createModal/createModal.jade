@@ -2,7 +2,8 @@
   button.close(ng-if='modal.dismissable', type='button', ng-click='$dismiss()') &times;
   h4.modal-title(ng-if='modal.title', ng-bind='modal.title')
 
-.container-fluid(ng-controller='CreateModalCtrl')
+.container-fluid.modal-contents(ng-controller='CreateModalCtrl')
+  .row.letter-set-title(editable-text='newSetTitle') {{newSetTitle}}
   .row.add-letter-controls
     form.form-group.form-inline
       input.form-control.character-field(type='text', placeholder='new character',
@@ -12,7 +13,7 @@
       button.btn.btn-success.add-letter-button(role='button',
         ng-click='addLetter(newLetter.character, newLetter.qty)') add letter
   .row
-    ul.letter-availability-list(ng-repeat='letter in letters')
+    ul.letter-availability-list(ng-repeat='letter in newSet')
       .col-xs-12.col-sm-6.col-md-4
         li
           h2.col-xs-4.col-xs-push-2.col-md-2.col-md-push-0 <b>{{letter.character}}</b>

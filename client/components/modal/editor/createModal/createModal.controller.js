@@ -3,7 +3,8 @@
 angular.module('readerboardPlannerApp')
   .controller('CreateModalCtrl', function ($scope) {
 
-     $scope.letters = [];
+     $scope.newSet = [];
+     $scope.newSetTitle = 'untitled set';
      $scope.lastQty = '1',
      $scope.newLetter = {
        character: '',
@@ -13,7 +14,7 @@ angular.module('readerboardPlannerApp')
 
      $scope.addLetter = function(character, qty) {
        if (character && qty ) {
-         $scope.letters.push({
+         $scope.newSet.push({
            character: character,
            qty: qty
          });
@@ -35,8 +36,8 @@ angular.module('readerboardPlannerApp')
      $scope.characterFieldChanged = function() {
        $scope.newLetter.character = _.last($scope.newLetter.character); // only the last typed character is held
        // only allow unique characters
-       _.forEach($scope.letters, function(letter) {
-         if (letter.character == $scope.newLetter.character) {
+       _.forEach($scope.newSet, function(letter) {
+         if (letter.character === $scope.newLetter.character) {
            resetFields();
            return;
          }
