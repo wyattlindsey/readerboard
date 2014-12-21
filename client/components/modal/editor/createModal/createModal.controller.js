@@ -25,15 +25,17 @@ angular.module('readerboardPlannerApp')
       */
 
      $scope.characterFieldChanged = function() {
-       $scope.newLetter.character = _.last($scope.newLetter.character);
+
+       $scope.newLetter.character = _.last($scope.newLetter.character); // only allow unique characters
      };
 
      $scope.qtyFieldChanged = function() {
        if (isNaN($scope.newLetter.qty)) {
-         $scope.newLetter.qty = $scope.lastQty;
+         $scope.newLetter.qty = $scope.lastQty; // only allow numbers
+         return;
        }
        if ($scope.newLetter.qty > 99) {
-         $scope.newLetter.qty = 99;
+         $scope.newLetter.qty = 99; // only allow numbers less than 100
        }
      };
 
