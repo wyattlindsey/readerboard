@@ -14,9 +14,9 @@
         ng-click='addLetter(newLetter.character, newLetter.qty)') add letter
   .row
     ul(ng-repeat='letter in newSet')
-      .col-xs-12.col-sm-6.col-md-4
+      .col-xs-12.col-sm-6.col-md-4(ng-mouseenter='letterHoverEnter(letter)', ng-mouseleave='letterHoverLeave(letter)')
         li.set-item
-          a.trash-icon(ng-click='deleteLetter($index)')
+          a.trash-icon(ng-click='deleteLetter($index)', ng-show='letter.showTrash')
             i.fa.fa-trash.pull-left
           h2.col-xs-4.col-xs-push-2.col-md-2.col-md-push-0(editable-text='letter.character', onbeforesave='validateCharacter($data, $index)') <b>{{letter.character}}</b>
           h2.list-qty.col-xs-4.col-xs-push-2.col-md-3.col-md-pull-0(editable-range='letter.qty') {{letter.qty}}

@@ -5,12 +5,11 @@ describe('Letters View', function() {
 
 });
 
-describe('Create Modal', function() {
+describe('Create Modal main controls', function() {
 
   var characterInput = element(by.model('newLetter.character'));
   var qtyInput = element(by.model('newLetter.qty'));
   var addLetterButton = element(by.buttonText('add letter'));
-  var letterAvailabilityList = element.all(by.repeater('letter in newSet'));
 
   beforeEach(function() {
     browser.get('/letters');
@@ -40,7 +39,29 @@ describe('Create Modal', function() {
     expect(qtyInput.getAttribute('value')).toEqual('100');
   });
 
-  it('should add newly created letters to the list', function() {
+
+
+  it('should not allow duplicates', function() {
+    characterInput.sendKeys('a');
+    characterInput.sendKeys('\t');
+    qtyInput.sendKeys('2');
+    addLetterButton.click();
+    expect(characterInput.getAttribute('value')).toEqual('');
+  });
+
+
+
+});
+
+describe('Create Modal availability list', function() {
+  var characterInput = element(by.model('newLetter.character'));
+  var qtyInput = element(by.model('newLetter.qty'));
+  var addLetterButton = element(by.buttonText('add letter'));
+  var letterAvailabilityList = element.all(by.repeater('letter in newSet'));
+
+  beforeEach(function() {
+    browser.get('/letters');
+    element(by.buttonText('Create new set')).click();
     characterInput.sendKeys('a');
     characterInput.sendKeys('\t');
     qtyInput.sendKeys('2');
@@ -49,15 +70,18 @@ describe('Create Modal', function() {
     characterInput.sendKeys('\t');
     qtyInput.sendKeys('3');
     addLetterButton.click();
+  });
+
+  it('should add newly created letters to the list', function() {
     expect(letterAvailabilityList.getText()).toEqual(['a\n2','b\n3']);
   });
 
-  it('should not allow duplicates', function() {
-    characterInput.sendKeys('a');
-    characterInput.sendKeys('\t');
-    qtyInput.sendKeys('2');
-    addLetterButton.click();
-    expect(characterInput.getAttribute('value')).toEqual('');
+  it('should delete items from the list', function() {
+    browser.actions().
+        mouseMove(element.all(by.css('.set-item')).last()).
+        perform();
+    element(by.repeater('letter in newSet').row(1)).$('.trash-icon').click();
+    expect(letterAvailabilityList.getText()).toEqual(['a\n2']);
   });
 
 });

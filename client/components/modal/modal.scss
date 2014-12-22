@@ -59,10 +59,17 @@
     list-style: none;
 
     .trash-icon {
-      line-height: 0px;
+      position: absolute;
+      top: 18px;
+      left: 0px;
+      color: $brand-danger;
+      font-size: 22px;
+    }
+    .list-character {
     }
     .list-qty {
       color: #568B56;
+      margin-left: 36px;
     }
   }
 

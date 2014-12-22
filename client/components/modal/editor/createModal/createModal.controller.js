@@ -3,24 +3,42 @@
 angular.module('readerboardPlannerApp')
   .controller('CreateModalCtrl', function ($scope) {
 
-     $scope.newSet = [];
-     $scope.newSetTitle = 'untitled set';
-     $scope.lastQty = '1',
-     $scope.newLetter = {
-       character: '',
-       qty: 1
-     };
+    $scope.newSet = [];
+    $scope.newSetTitle = 'untitled set';
+    $scope.lastQty = '1',
+    $scope.newLetter = {
+     character: '',
+     qty: 1
+    };
+
+      /**
+       * addLetter
+       *
+       * @param character
+       * @param qty
+       */
 
 
-     $scope.addLetter = function(character, qty) {
-       if (character && qty ) {
-         $scope.newSet.push({
-           character: character,
-           qty: qty
-         });
-         resetFields();
-       }
-     };
+    $scope.addLetter = function(character, qty) {
+     if (character && qty ) {
+       $scope.newSet.push({
+         character: character,
+         qty: qty,
+         showTrash: false
+       });
+       resetFields();
+     }
+    };
+
+      /**
+       * deleteLetter
+       *
+       * @param index
+       */
+
+    $scope.deleteLetter = function(index) {
+      $scope.newSet.splice(index, 1);
+    };
 
      var resetFields = function() {
        $scope.newLetter = {
@@ -76,11 +94,15 @@ angular.module('readerboardPlannerApp')
       };
 
       /**
-       * $scope.deleteLetter(index)
+       * show/hide for trashcan delete icon
+       *
        */
 
-      $scope.deleteLetter = function(index) {
-        $scope.newSet.splice(index, 1);
+      $scope.letterHoverEnter = function(letter) {
+        return letter.showTrash = true;
       };
 
+      $scope.letterHoverLeave = function(letter) {
+        return letter.showTrash = false;
+      };
   });
