@@ -29,7 +29,7 @@ angular.module('readerboardPlannerApp')
          qty: qty,
          showTrash: false
        });
-       resetFields();
+       resetControls();
      }
     };
 
@@ -41,14 +41,22 @@ angular.module('readerboardPlannerApp')
 
     $scope.deleteLetter = function(index) {
       $scope.newSet.splice(index, 1);
+      resetControls();
     };
 
-     var resetFields = function() {
+     var resetControls = function() {
        $scope.newLetter = {
          character: '',
          qty: 1
        };
        $scope.addLetterButtonEnabled = false;
+       if ($scope.newSet.length > 0) {
+         $scope.modal.buttons[0].enabled = true;
+         console.log('stuff')
+       } else {
+         $scope.modal.buttons[0].enabled = false;
+         console.log('none')
+       }
      };
 
 
@@ -61,8 +69,7 @@ angular.module('readerboardPlannerApp')
        // only allow unique characters
        _.forEach($scope.newSet, function(letter) {
          if (letter.character === $scope.newLetter.character) {
-           resetFields();
-           return;
+           resetControls();
          }
        });
        if ($scope.newLetter.character) {

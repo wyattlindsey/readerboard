@@ -9,7 +9,7 @@ describe('Create Modal main controls', function() {
 
   var characterInput = element(by.model('newLetter.character'));
   var qtyInput = element(by.model('newLetter.qty'));
-  var addLetterButton = element(by.buttonText('add letter'));
+  var addLetterButton = element(by.buttonText('Add letter'));
 
   beforeEach(function() {
     browser.get('/letters');
@@ -39,8 +39,6 @@ describe('Create Modal main controls', function() {
     expect(qtyInput.getAttribute('value')).toEqual('100');
   });
 
-
-
   it('should not allow duplicates', function() {
     characterInput.sendKeys('a');
     characterInput.sendKeys('\t');
@@ -49,15 +47,28 @@ describe('Create Modal main controls', function() {
     expect(characterInput.getAttribute('value')).toEqual('');
   });
 
-
+  it('should only activate Add button when there is valid input', function() {
+    expect(addLetterButton.isEnabled()).toEqual(false);
+    characterInput.sendKeys('a');
+    expect(addLetterButton.isEnabled()).toEqual(true);
+    characterInput.sendKeys('\t');
+    qtyInput.sendKeys('2');
+    addLetterButton.click();
+    characterInput.sendKeys('a');
+    expect(addLetterButton.isEnabled()).toEqual(false);
+  });
 
 });
 
 describe('Create Modal availability list', function() {
   var characterInput = element(by.model('newLetter.character'));
   var qtyInput = element(by.model('newLetter.qty'));
-  var addLetterButton = element(by.buttonText('add letter'));
+  var addLetterButton = element(by.buttonText('Add letter'));
   var letterAvailabilityList = element.all(by.repeater('letter in newSet'));
+  var setItem = element.all(by.css('.set-item'));
+  var trashIcon = element.all(by.css('.set-item .trash-icon'));
+  var createButton = element.all(by.buttonText('Create'));
+
 
   beforeEach(function() {
     browser.get('/letters');
@@ -78,7 +89,7 @@ describe('Create Modal availability list', function() {
 
   it('should delete items from the list', function() {
     browser.actions().
-        mouseMove(element.all(by.css('.set-item')).last()).
+        mouseMove((setItem).last()).
         perform();
     element(by.repeater('letter in newSet').row(1)).$('.trash-icon').click();
     expect(letterAvailabilityList.getText()).toEqual(['a\n2']);
@@ -86,13 +97,13 @@ describe('Create Modal availability list', function() {
 
   it('should show trash can for any item when not editing', function() {
     browser.actions().
-      mouseMove(element.all(by.css('.set-item')).first()).
+      mouseMove((setItem).first()).
       perform();
-    expect(element.all(by.css('.set-item .trash-icon')).first().isDisplayed()).toBeTruthy();
+    expect((trashIcon).first().isDisplayed()).toBeTruthy();
     browser.actions().
-        mouseMove(element.all(by.css('.set-item')).last()).
+        mouseMove((setItem).last()).
         perform();
-    expect(element.all(by.css('.set-item .trash-icon')).last().isDisplayed()).toBeTruthy();
+    expect((trashIcon).last().isDisplayed()).toBeTruthy();
   });
 
   it('should not show trash can when editing, except for the item being edited', function() {
@@ -101,13 +112,29 @@ describe('Create Modal availability list', function() {
         perform();
     browser.actions().click().perform();
     browser.actions().
-        mouseMove(element.all(by.css('.set-item')).first()).
+        mouseMove(setItem.first()).
         perform();
-    expect(element.all(by.css('.set-item .trash-icon')).first().isDisplayed()).toBeTruthy();
+    expect(trashIcon.first().isDisplayed()).toBeTruthy();
     browser.actions().
-        mouseMove(element.all(by.css('.set-item')).last()).
+        mouseMove((setItem).last()).
         perform();
-    expect(element.all(by.css('.set-item .trash-icon')).last().isDisplayed()).toBeFalsy();
+    expect(trashIcon.last().isDisplayed()).toBeFalsy();
+  });
+
+  it('should make the Create button disabled if there are no items in the set', function() {
+    expect(createButton.isEnabled()).toEqual([true]);
+
+    browser.actions().
+        mouseMove(setItem.first()).
+        perform();
+    element(by.repeater('letter in newSet').row(0)).$('.trash-icon').click();
+
+    browser.actions().
+        mouseMove(setItem.first()).
+        perform();
+    element(by.repeater('letter in newSet').row(0)).$('.trash-icon').click();
+
+    expect(createButton.isEnabled()).toEqual([false]);
   });
 
 });

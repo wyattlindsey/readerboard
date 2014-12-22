@@ -98,12 +98,14 @@ angular.module('readerboardPlannerApp')
               buttons: [{
                 classes: 'btn-success',
                 text: 'Create',
+                enabled: false,
                 click: function(e) {
                   createModal.close(e);
                 }
               }, {
                 classes: 'btn-default',
                 text: 'Cancel',
+                enabled: true,
                 click: function(e) {
                   createModal.dismiss(e);
                 }
