@@ -84,4 +84,30 @@ describe('Create Modal availability list', function() {
     expect(letterAvailabilityList.getText()).toEqual(['a\n2']);
   });
 
+  it('should show trash can for any item when not editing', function() {
+    browser.actions().
+      mouseMove(element.all(by.css('.set-item')).first()).
+      perform();
+    expect(element.all(by.css('.set-item .trash-icon')).first().isDisplayed()).toBeTruthy();
+    browser.actions().
+        mouseMove(element.all(by.css('.set-item')).last()).
+        perform();
+    expect(element.all(by.css('.set-item .trash-icon')).last().isDisplayed()).toBeTruthy();
+  });
+
+  it('should not show trash can when editing, except for the item being edited', function() {
+    browser.actions().
+        mouseMove(element.all(by.css('.set-item .list-character')).first()).
+        perform();
+    browser.actions().click().perform();
+    browser.actions().
+        mouseMove(element.all(by.css('.set-item')).first()).
+        perform();
+    expect(element.all(by.css('.set-item .trash-icon')).first().isDisplayed()).toBeTruthy();
+    browser.actions().
+        mouseMove(element.all(by.css('.set-item')).last()).
+        perform();
+    expect(element.all(by.css('.set-item .trash-icon')).last().isDisplayed()).toBeFalsy();
+  });
+
 });

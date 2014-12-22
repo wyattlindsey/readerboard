@@ -10,6 +10,9 @@ angular.module('readerboardPlannerApp')
      character: '',
      qty: 1
     };
+    var editing = false; // state of xeditable control
+    var currentlyEditedLetter = {};
+    $scope.addLetterButtonEnabled = false;
 
       /**
        * addLetter
@@ -45,7 +48,9 @@ angular.module('readerboardPlannerApp')
          character: '',
          qty: 1
        };
+       $scope.addLetterButtonEnabled = false;
      };
+
 
      /**
       * validation for new letter fields
@@ -60,6 +65,11 @@ angular.module('readerboardPlannerApp')
            return;
          }
        });
+       if ($scope.newLetter.character) {
+         $scope.addLetterButtonEnabled = true;
+       } else {
+         $scope.addLetterButtonEnabled = false;
+       }
 
      };
 
@@ -72,6 +82,7 @@ angular.module('readerboardPlannerApp')
          $scope.newLetter.qty = 100; // only allow numbers less than or equal 100
        }
      };
+
 
       /**
        * validation for angular-xeditable fields
@@ -94,15 +105,36 @@ angular.module('readerboardPlannerApp')
       };
 
       /**
-       * show/hide for trashcan delete icon
-       *
+       * show/hide for trashcan delete icon, but only for currently edited item when in
+       * xeditable form
        */
 
       $scope.letterHoverEnter = function(letter) {
-        return letter.showTrash = true;
+        if (!editing) {
+          return letter.showTrash = true;
+        } else if (letter === currentlyEditedLetter) {
+          return letter.showTrash = true;
+        } else {
+          return letter.showTrash = false;
+        }
       };
 
       $scope.letterHoverLeave = function(letter) {
         return letter.showTrash = false;
+      };
+
+      /**
+       * events for entering and exiting xeditable edit-in-place mode
+       *
+       */
+
+      $scope.xeditableShow = function(letter) {
+        editing = true;
+        currentlyEditedLetter = letter;
+      };
+
+      $scope.xeditableHide = function() {
+        editing = false;
+        currentlyEditedLetter = {};
       };
   });

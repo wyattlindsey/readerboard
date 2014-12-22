@@ -61,11 +61,16 @@
     .trash-icon {
       position: absolute;
       top: 18px;
-      left: 0px;
+      left: -10px;
       color: $brand-danger;
       font-size: 22px;
+      @media (min-width: 768px) and (max-width: 1024px) {
+        left: 35px;
+      }
     }
+
     .list-character {
+      margin-left: 10px;
     }
     .list-qty {
       color: #568B56;

@@ -3,6 +3,10 @@
 angular.module('readerboardPlannerApp')
   .controller('LettersCtrl', function ($scope, Modal) {
 
-    $scope.create = Modal.create(function() {
-    });
+
+    var createNewSet = function() {
+      console.log('creating');
+    };
+
+    $scope.create = Modal.create(createNewSet);
   });

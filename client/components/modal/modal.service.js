@@ -76,12 +76,14 @@ angular.module('readerboardPlannerApp')
         }
       },
 
-      create: function() {
+      create: function(create) {
 
         /**
          * Open a creation modal
          *
          */
+
+        create = create || angular.noop;
 
         return function() {
           var createModal;
@@ -109,8 +111,10 @@ angular.module('readerboardPlannerApp')
             }
           }, 'modal-default');
 
+
+
           createModal.result.then(function(event) {
-//            del.apply(event, args);
+            create.apply();
           });
         };
       }
