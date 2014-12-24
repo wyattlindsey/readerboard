@@ -16,12 +16,21 @@
   }
 
   table {
+    tr {
+      height: 68px;
+    }
     th.row-tools {
-      max-width: 100px;
+      width: 250px;
     }
   }
 
   tbody {
+    .set-title {
+      padding-left: 32px;
+    }
+    .set-qty {
+      text-align: center;
+    }
     .row-tools {
       ul {
         text-align: center;
@@ -29,8 +38,8 @@
         li {
           list-style: none;
           display: inline;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: 14px;
+          padding-right: 14px;
         }
       }
     }

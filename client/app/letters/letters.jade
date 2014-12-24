@@ -21,7 +21,7 @@ header#banner.hero-unit
         tbody(ng-repeat='set in sets')
           tr(ng-mouseenter='set.showTools = true', ng-mouseleave='set.showTools = false')
             th.row-tools
-              ul
+              ul(ng-show='set.showTools')
                 li
                   a(ng-click='deleteSet(set._id)')
                     i.fa.fa-trash
@@ -31,6 +31,6 @@ header#banner.hero-unit
                 li
                   a(ng-click='editSet(set._id)')
                     i.fa.fa-pencil
-            th {{set.title}}
-            th {{set.letters.length}}
+            th.set-title {{set.title}}
+            th.set-qty {{set.letters.length}}
 

@@ -5,8 +5,6 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
   $scope.newSet = {};
   $scope.sets = [];
 
-
-
   var getSets = function() {
     $http.get('/api/sets').success(function(data) {
       $scope.sets = data;
@@ -15,10 +13,11 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   getSets();
 
-
   var createNewSet = function() {
-    var newSet = JSON.stringify($scope.newSet);
-    $http.post('/api/sets', newSet).success(function(data) {
+
+    $scope.newSet.title = getUniqueTitle($scope.newSet.title);
+
+    $http.post('/api/sets', JSON.stringify($scope.newSet)).success(function(data) {
       getSets();
     });
 
@@ -28,6 +27,26 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
     $http.delete('/api/sets/' + id).success(function() {
       getSets();
     });
+  };
+
+  $scope.copySet = function(id) {
+    console.log('copy');
+  };
+
+  $scope.editSet = function(id) {
+    console.log('edit');
+  };
+
+  var getUniqueTitle = function(title) {
+    _.each($scope.sets, function(thisSet) {
+      if (thisSet.title === title) {
+        title += ' copy';
+        getUniqueTitle(title);
+      }
+    });
+
+    return title;
+
   };
 
   $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
