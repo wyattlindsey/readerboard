@@ -10,8 +10,30 @@
   margin-top: 36px;
   margin-bottom: 36px;
 
-  .row-tools {
-    min-width: 100px;
+  .sets-table-header th {
+    background-color: lighten($brand-primary, 25%);
+    text-align: center !important;
+  }
+
+  table {
+    th.row-tools {
+      max-width: 100px;
+    }
+  }
+
+  tbody {
+    .row-tools {
+      ul {
+        text-align: center;
+        padding-left: 0px;
+        li {
+          list-style: none;
+          display: inline;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+    }
   }
 }
 
