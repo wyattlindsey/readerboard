@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('readerboardPlannerApp')
-  .controller('CreateModalCtrl', function ($scope) {
+    .controller('CreateModalCtrl', function ($scope) {
 
-    $scope.newSet = [];
-    $scope.newSetTitle = 'untitled set';
+    $scope.newSet.letters = [];
+    $scope.newSet.title = 'untitled set';
+    console.log($scope.newSet);
     $scope.lastQty = '1',
     $scope.newLetter = {
      character: '',
@@ -24,7 +25,7 @@ angular.module('readerboardPlannerApp')
 
     $scope.addLetter = function(character, qty) {
      if (character && qty ) {
-       $scope.newSet.push({
+       $scope.newSet.letters.push({
          character: character,
          qty: qty,
          showTrash: false
@@ -40,7 +41,7 @@ angular.module('readerboardPlannerApp')
        */
 
     $scope.deleteLetter = function(index) {
-      $scope.newSet.splice(index, 1);
+      $scope.newSet.letters.splice(index, 1);
       resetControls();
     };
 
@@ -50,12 +51,10 @@ angular.module('readerboardPlannerApp')
          qty: 1
        };
        $scope.addLetterButtonEnabled = false;
-       if ($scope.newSet.length > 0) {
+       if ($scope.newSet.letters.length > 0) {
          $scope.modal.buttons[0].enabled = true;
-         console.log('stuff')
        } else {
          $scope.modal.buttons[0].enabled = false;
-         console.log('none')
        }
      };
 
@@ -67,7 +66,7 @@ angular.module('readerboardPlannerApp')
      $scope.characterFieldChanged = function() {
        $scope.newLetter.character = _.last($scope.newLetter.character); // only the last typed character is held
        // only allow unique characters
-       _.forEach($scope.newSet, function(letter) {
+       _.forEach($scope.newSet.letters, function(letter) {
          if (letter.character === $scope.newLetter.character) {
            resetControls();
          }
@@ -100,7 +99,7 @@ angular.module('readerboardPlannerApp')
         if (data.length > 1) {
           return 'only one character';
         } else {
-          _.forEach($scope.newSet, function(letter) {
+          _.forEach($scope.newSet.letters, function(letter) {
             if (data === letter.character) {
               duplicates++;
             }
@@ -144,4 +143,5 @@ angular.module('readerboardPlannerApp')
         editing = false;
         currentlyEditedLetter = {};
       };
+
   });

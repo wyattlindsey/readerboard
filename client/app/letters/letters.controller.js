@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('readerboardPlannerApp')
-  .controller('LettersCtrl', function ($scope, Modal) {
+angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($scope, Modal) {
+
+  $scope.newSet = {};
+
+  var createNewSet = function() {
+  };
+
+  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
 
 
-    var createNewSet = function() {
-      console.log('creating');
-    };
-
-    $scope.create = Modal.create(createNewSet);
-  });
+});

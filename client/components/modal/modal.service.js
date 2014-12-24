@@ -13,6 +13,8 @@ angular.module('readerboardPlannerApp')
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
 
+      scope.newSet = scope.modal.newSetData;
+
       angular.extend(modalScope, scope);
 
       return $modal.open({
@@ -76,14 +78,15 @@ angular.module('readerboardPlannerApp')
         }
       },
 
-      create: function(create) {
+      create: function(createNewSet, newSet) {
 
         /**
          * Open a creation modal
          *
          */
 
-        create = create || angular.noop;
+
+        createNewSet = createNewSet || angular.noop;
 
         return function() {
           var createModal;
@@ -95,6 +98,7 @@ angular.module('readerboardPlannerApp')
               template: 'components/modal/editor/createModal/createModal.html',
               controller: './editor/createModal/CreateModelCtrl',
               size: 'lg',
+              newSetData: newSet,
               buttons: [{
                 classes: 'btn-success',
                 text: 'Create',
@@ -116,7 +120,7 @@ angular.module('readerboardPlannerApp')
 
 
           createModal.result.then(function(event) {
-            create.apply();
+            createNewSet.apply();
           });
         };
       }

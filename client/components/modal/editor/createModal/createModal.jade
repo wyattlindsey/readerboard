@@ -3,7 +3,7 @@
   h4.modal-title(ng-if='modal.title', ng-bind='modal.title')
 
 .container-fluid.modal-contents(ng-controller='CreateModalCtrl')
-  .row.letter-set-title(editable-text='newSetTitle') {{newSetTitle}}
+  .row.letter-set-title(editable-text='newSet.title') {{newSet.title}}
   .row.add-letter-controls
     form.form-group.form-inline
       input.form-control.character-field(type='text', placeholder='new character',
@@ -14,7 +14,7 @@
         ng-click='addLetter(newLetter.character, newLetter.qty)',
         ng-disabled='!addLetterButtonEnabled') Add letter
   .row
-    ul(ng-repeat='letter in newSet')
+    ul(ng-repeat='letter in newSet.letters')
       .col-xs-12.col-sm-6.col-md-4(ng-mouseenter='letterHoverEnter(letter)', ng-mouseleave='letterHoverLeave(letter)')
         li.set-item
           a.trash-icon(ng-click='deleteLetter($index)', ng-show='letter.showTrash')
