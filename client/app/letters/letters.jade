@@ -10,4 +10,19 @@ header#banner.hero-unit
     .row.editor-buttons
       .nav.nav-pills
         button.btn.btn-lg.btn-success(role='button', ng-click='openCreationModal()') Create new set
+    .row.sets
+      table.table.table-hover
+        thead.sets-table-header
+          tr
+            th
+            th Set Title
+            th # letters
+        tbody(ng-repeat='set in sets')
+          tr(ng-mouseenter='set.trashIcon.show = true', ng-mouseleave='set.trashIcon.show = false')
+            th.row-tools
+              .div(ng-show='set.trashIcon.show')
+                a(ng-click='deleteSet(set._id)')
+                  i.fa.fa-trash
+            th {{set.title}}
+            th {{set.letters.length}}
 

@@ -13,7 +13,8 @@ angular.module('readerboardPlannerApp')
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
 
-      scope.newSet = scope.modal.newSetData;
+      if (scope.modal.newSetData)
+        scope.newSet = scope.modal.newSetData;
 
       angular.extend(modalScope, scope);
 

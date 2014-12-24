@@ -5,21 +5,22 @@ angular.module('readerboardPlannerApp')
 
     $scope.newSet.letters = [];
     $scope.newSet.title = 'untitled set';
-    console.log($scope.newSet);
-    $scope.lastQty = '1',
     $scope.newLetter = {
      character: '',
      qty: 1
     };
     var editing = false; // state of xeditable control
     var currentlyEditedLetter = {};
+    var lastQty = '1';
     $scope.addLetterButtonEnabled = false;
+
 
       /**
        * addLetter
        *
        * @param character
        * @param qty
+       *
        */
 
 
@@ -28,7 +29,7 @@ angular.module('readerboardPlannerApp')
        $scope.newSet.letters.push({
          character: character,
          qty: qty,
-         showTrash: false
+         showTrash: false  // throwaway value not saved in model, just used for display
        });
        resetControls();
      }
@@ -81,7 +82,7 @@ angular.module('readerboardPlannerApp')
 
      $scope.qtyFieldChanged = function() {
        if (isNaN($scope.newLetter.qty)) {
-         $scope.newLetter.qty = $scope.lastQty; // only allow numbers
+         $scope.newLetter.qty = lastQty; // only allow numbers
          return;
        }
        if ($scope.newLetter.qty > 100) {
