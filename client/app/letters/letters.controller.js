@@ -4,52 +4,102 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.newSet = {};
   $scope.sets = [];
+  $scope.thisItem = {};
 
+
+
+  /**
+   * getSets - pull in sets from api endpoint
+   *
+   */
   var getSets = function() {
     $http.get('/api/sets').success(function(data) {
       $scope.sets = data;
     });
   };
 
-  getSets();
+  getSets(); // pull in set data on first time through
+
+
+  /**
+   * createNewSet - this function is called when the creation modal is closed
+   *
+   */
 
   var createNewSet = function() {
 
-    $scope.newSet.title = getUniqueTitle($scope.newSet.title);
+    var newSet;
 
-    $http.post('/api/sets', JSON.stringify($scope.newSet)).success(function(data) {
+    newSet = $scope.newSet;
+
+    newSet.title = getUniqueTitle(newSet.title);
+
+    $http.post('/api/sets', JSON.stringify(newSet)).success(function() {
       getSets();
     });
 
   };
 
-  $scope.deleteSet = function(id) {
-    $http.delete('/api/sets/' + id).success(function() {
+  /**
+   * deleteSet
+   *
+   * @param id
+   */
+
+  var deleteSet = function() {
+    var itemData;
+
+    itemData = $scope.thisItem;
+    $http.delete('/api/sets/' + itemData.id).success(function() {
       getSets();
     });
   };
 
-  $scope.copySet = function(id) {
-    console.log('copy');
+
+
+  /**
+   * copySet
+   *
+   * @param id
+   */
+
+  $scope.copySet = function(thisSet) {
+    var copySetData = {};
+    copySetData.title = thisSet.title;
+    copySetData.letters = thisSet.letters;
+    createNewSet(copySetData);
   };
 
-  $scope.editSet = function(id) {
+  /**
+   * editSet
+   *
+   * @param id
+   */
+
+  $scope.editSet = function(thisSet) {
     console.log('edit');
   };
+
+  /**
+   * getUniqueTitle - takes a string, checks the other titles, and returns a unique title
+   *
+   * @param title
+   * @returns {*} unique title string
+   */
 
   var getUniqueTitle = function(title) {
     _.each($scope.sets, function(thisSet) {
       if (thisSet.title === title) {
         title += ' copy';
-        getUniqueTitle(title);
+        getUniqueTitle(title); // recursively call this function to verify that appending
+                               // ' copy' to the end isn't just another duplicated name
       }
     });
-
-    return title;
-
+    return title; // title is unique
   };
 
-  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
 
+  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
+  $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
 
 });

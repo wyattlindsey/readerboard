@@ -23,13 +23,13 @@ header#banner.hero-unit
             th.row-tools
               ul(ng-show='set.showTools')
                 li
-                  a(ng-click='deleteSet(set._id)')
+                  a(ng-click='openDeleteConfirmModal(set)')
                     i.fa.fa-trash
                 li
-                  a(ng-click='copySet(set._id)')
+                  a(ng-click='copySet(set)')
                     i.fa.fa-copy
                 li
-                  a(ng-click='editSet(set._id)')
+                  a(ng-click='editSet(set)')
                     i.fa.fa-pencil
             th.set-title {{set.title}}
             th.set-qty {{set.letters.length}}

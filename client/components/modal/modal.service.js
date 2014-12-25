@@ -13,8 +13,14 @@ angular.module('readerboardPlannerApp')
       scope = scope || {};
       modalClass = modalClass || 'modal-default';
 
+
+
       if (scope.modal.newSetData)
         scope.newSet = scope.modal.newSetData;
+      if (scope.modal.itemData) {
+        scope.itemData = scope.modal.itemData;
+      }
+
 
       angular.extend(modalScope, scope);
 
@@ -37,7 +43,7 @@ angular.module('readerboardPlannerApp')
          * @param  {Function} del - callback, ran when delete is confirmed
          * @return {Function}     - the function to open the modal (ex. myModalFn)
          */
-        delete: function(del) {
+        delete: function(del, thisItem) {
           del = del || angular.noop;
 
           /**
@@ -47,8 +53,11 @@ angular.module('readerboardPlannerApp')
            */
           return function() {
             var args = Array.prototype.slice.call(arguments),
-                name = args.shift(),
-                deleteModal;
+              id = args[0]._id,
+              name = args[0].title,
+              deleteModal;
+
+            thisItem.id = id;
 
             deleteModal = openModal({
               modal: {
@@ -56,6 +65,7 @@ angular.module('readerboardPlannerApp')
                 title: 'Confirm Delete',
                 template: 'components/modal/modal.html',
                 html: '<p>Are you sure you want to delete <strong>' + name + '</strong> ?</p>',
+                itemData: thisItem,
                 buttons: [{
                   classes: 'btn-danger',
                   text: 'Delete',
@@ -73,7 +83,7 @@ angular.module('readerboardPlannerApp')
             }, 'modal-danger');
 
             deleteModal.result.then(function(event) {
-              del.apply(event, args);
+              del.call(args[0]._id);
             });
           };
         }
