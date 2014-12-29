@@ -17,9 +17,10 @@ angular.module('readerboardPlannerApp')
 
       if (scope.modal.newSetData)
         scope.newSet = scope.modal.newSetData;
-      if (scope.modal.itemData) {
+      if (scope.modal.itemData)
         scope.itemData = scope.modal.itemData;
-      }
+      if (scope.modal.setData)
+        scope.thisSet = scope.modal.setData;
 
 
       angular.extend(modalScope, scope);
@@ -136,30 +137,41 @@ angular.module('readerboardPlannerApp')
         };
       },
 
-      edit: function(editSet, thisSet) {
+      edit: function(editSet, thisSet, newSetFlag) {
 
         /**
          * Open a creation modal
          *
          */
 
-
         editSet = editSet || angular.noop;
 
         return function() {
-          var editModal;
+          var args = Array.prototype.slice.call(arguments),
+              primaryButtonText,
+              modalTitle,
+              editModal;
+
+          if (newSetFlag) {
+            thisSet = args[0];
+            primaryButtonText = 'Create';
+            modalTitle = 'Create new set';
+          } else {
+            primaryButtonText = 'Save';
+            modalTitle = 'Edit set';
+          }
 
           editModal = openModal({
             modal: {
               dismissable: true,
-              title: 'Edit set',
+              title: modalTitle,
               template: 'components/modal/editor/editModal/editModal.html',
               controller: './editor/editModal/EditModelCtrl',
               size: 'lg',
-              newSetData: thisSet,
+              setData: thisSet,
               buttons: [{
                 classes: 'btn-success',
-                text: 'Save',
+                text: primaryButtonText,
                 enabled: false,
                 click: function(e) {
                   editModal.close(e);

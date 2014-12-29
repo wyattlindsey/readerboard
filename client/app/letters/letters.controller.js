@@ -102,8 +102,8 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
   };
 
 
-  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
-  $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
+  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet, true);
   $scope.openEditSetModal = Modal.edit(editSet, $scope.thisSet);
+  $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
 
 });
