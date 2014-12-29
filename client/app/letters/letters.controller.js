@@ -4,6 +4,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.newSet = {};
   $scope.sets = [];
+  $scope.thisSet = {};
   $scope.thisItem = {};
 
 
@@ -63,6 +64,8 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    * @param id
    */
 
+  // does this need to be $scope level?
+
   $scope.copySet = function(thisSet) {
     var copySetData = {};
     copySetData.title = thisSet.title;
@@ -76,7 +79,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    * @param id
    */
 
-  $scope.editSet = function(thisSet) {
+  var editSet = function(thisSet) {
     console.log('edit');
   };
 
@@ -101,5 +104,6 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet);
   $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
+  $scope.openEditSetModal = Modal.edit(editSet, $scope.thisSet);
 
 });

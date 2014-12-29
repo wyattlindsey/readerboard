@@ -134,6 +134,53 @@ angular.module('readerboardPlannerApp')
             createNewSet.apply();
           });
         };
+      },
+
+      edit: function(editSet, thisSet) {
+
+        /**
+         * Open a creation modal
+         *
+         */
+
+
+        editSet = editSet || angular.noop;
+
+        return function() {
+          var editModal;
+
+          editModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Edit set',
+              template: 'components/modal/editor/editModal/editModal.html',
+              controller: './editor/editModal/EditModelCtrl',
+              size: 'lg',
+              newSetData: thisSet,
+              buttons: [{
+                classes: 'btn-success',
+                text: 'Save',
+                enabled: false,
+                click: function(e) {
+                  editModal.close(e);
+                }
+              }, {
+                classes: 'btn-default',
+                text: 'Cancel',
+                enabled: true,
+                click: function(e) {
+                  editModal.dismiss(e);
+                }
+              }]
+            }
+          }, 'modal-default');
+
+
+
+          editModal.result.then(function(event) {
+            editSet.apply();
+          });
+        };
       }
 
     };

@@ -27,7 +27,7 @@ angular.module('readerboardPlannerApp')
        */
 
     this.readConfig = function() {
-      $http.get('../app/main/config.json')
+      $http.get('../config.json')
           .success(function(data) {
             $scope.readerBoardLetters = data.letters;
 

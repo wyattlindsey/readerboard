@@ -141,9 +141,11 @@ var _ = require('lodash');
 
 describe('Letter set list functions', function() {
 
-  var characterInput = element(by.model('newLetter.character'));
-  var title = element.all(by.model('newSet.title'));
-  var qtyInput = element(by.model('newLetter.qty'));
+  var characterInput = element.all(by.model('newLetter.character'));
+  var title = element.all(by.css('letter-set-title'));
+  var qtyInput = element.all(by.model('newLetter.qty'));
+  var titleInput = element.all(by.css('editable-input'));
+  var okButton = element.all(by.css('glyphicon-ok'));
   var addLetterButton = element(by.buttonText('Add letter'));
   var createButton = element.all(by.buttonText('Create'));
   var listOfSets = element.all(by.repeater('set in sets'));
@@ -164,16 +166,17 @@ describe('Letter set list functions', function() {
 
   });
 
-  it('should add new set to list of sets', function() {
-    listOfSets.count().then(function(originalCount) {
-      var startCount = originalCount;
-      createButton.click();
-      expect(listOfSets.count()).toEqual(startCount + 1);
-    });
-  });
+//  it('should add new set to list of sets', function() {
+//    listOfSets.count().then(function(originalCount) {
+//      var startCount = originalCount;
+//      createButton.click();
+//      expect(listOfSets.count()).toEqual(startCount + 1);
+//    });
+//  });
 
   it('should name the set after the name entered in the modal', function() {
-    title.click();
+//    expect(title.getAttribute('value')).toEqual('untitled');
+//    okButton.click();
 
   });
 

@@ -29,7 +29,7 @@ header#banner.hero-unit
                   a(ng-click='copySet(set)')
                     i.fa.fa-copy
                 li
-                  a(ng-click='editSet(set)')
+                  a(ng-click='openEditSetModal(set)')
                     i.fa.fa-pencil
             th.set-title {{set.title}}
             th.set-qty {{set.letters.length}}
