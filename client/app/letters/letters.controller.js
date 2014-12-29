@@ -81,7 +81,10 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    */
 
   var editSet = function() {
-    console.log('editing');
+    $http.put('/api/sets/' + $scope.thisSet._id, JSON.stringify($scope.thisSet))
+        .success(function() {
+          getSets();
+        });
   };
 
   /**

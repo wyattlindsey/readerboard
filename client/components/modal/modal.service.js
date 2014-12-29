@@ -110,7 +110,7 @@ angular.module('readerboardPlannerApp')
                 isNew = true;
                 break;
               case 'edit':
-                thisSet = args[0];
+                angular.copy(args[0], thisSet);
                 thisSet.id = args[0]._id;
                 primaryButtonLabel = 'Save';
                 modalTitle = 'Edit set';
@@ -147,10 +147,8 @@ angular.module('readerboardPlannerApp')
               }
             }, 'modal-default');
 
-
-
             editModal.result.then(function(event) {
-              callback.apply();
+              callback.call();
             });
           };
         }
