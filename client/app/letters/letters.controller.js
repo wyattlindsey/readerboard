@@ -2,7 +2,6 @@
 
 angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($scope, $http, Modal) {
 
-  $scope.newSet = {};
   $scope.sets = [];
   $scope.thisSet = {};
   $scope.thisItem = {};
@@ -21,6 +20,10 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   getSets(); // pull in set data on first time through
 
+  $scope.$on('refreshSetList', function() {
+    getSets();
+  });
+
 
   /**
    * createNewSet - this function is called when the creation modal is closed
@@ -31,7 +34,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
     var newSet;
 
-    newSet = $scope.newSet;
+    newSet = $scope.thisSet;
 
     newSet.title = getUniqueTitle(newSet.title);
 
@@ -102,8 +105,8 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
   };
 
 
-  $scope.openCreationModal = Modal.create(createNewSet, $scope.newSet, true);
-  $scope.openEditSetModal = Modal.edit(editSet, $scope.thisSet);
+  $scope.openCreationModal = Modal.edit(createNewSet, $scope.thisSet, 'create');
+  $scope.openEditSetModal = Modal.edit(editSet, $scope.thisSet, 'edit');
   $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
 
 });

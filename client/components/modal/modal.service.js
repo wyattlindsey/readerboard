@@ -15,12 +15,10 @@ angular.module('readerboardPlannerApp')
 
 
 
-      if (scope.modal.newSetData)
-        scope.newSet = scope.modal.newSetData;
-      if (scope.modal.itemData)
-        scope.itemData = scope.modal.itemData;
-      if (scope.modal.setData)
+      if (scope.modal.setData) // for edit - can these 2 be combined?
         scope.thisSet = scope.modal.setData;
+      if (scope.modal.itemData) // for delete confirm
+        scope.itemData = scope.modal.itemData;
 
 
       angular.extend(modalScope, scope);
@@ -90,7 +88,7 @@ angular.module('readerboardPlannerApp')
         }
       },
 
-      create: function(createNewSet, newSet) {
+      edit: function(callback, thisSet, editModalType) {
 
         /**
          * Open a creation modal
@@ -98,80 +96,39 @@ angular.module('readerboardPlannerApp')
          */
 
 
-        createNewSet = createNewSet || angular.noop;
-
-        return function() {
-          var createModal;
-
-          createModal = openModal({
-            modal: {
-              dismissable: true,
-              title: 'Create new set',
-              template: 'components/modal/editor/createModal/createModal.html',
-              controller: './editor/createModal/CreateModelCtrl',
-              size: 'lg',
-              newSetData: newSet,
-              buttons: [{
-                classes: 'btn-success',
-                text: 'Create',
-                enabled: false,
-                click: function(e) {
-                  createModal.close(e);
-                }
-              }, {
-                classes: 'btn-default',
-                text: 'Cancel',
-                enabled: true,
-                click: function(e) {
-                  createModal.dismiss(e);
-                }
-              }]
-            }
-          }, 'modal-default');
-
-
-
-          createModal.result.then(function(event) {
-            createNewSet.apply();
-          });
-        };
-      },
-
-      edit: function(editSet, thisSet, newSetFlag) {
-
-        /**
-         * Open a creation modal
-         *
-         */
-
-        editSet = editSet || angular.noop;
+        callback = callback || angular.noop;
 
         return function() {
           var args = Array.prototype.slice.call(arguments),
-              primaryButtonText,
+              editModal,
               modalTitle,
-              editModal;
+              primaryButtonLabel;
 
-          if (newSetFlag) {
-            thisSet = args[0];
-            primaryButtonText = 'Create';
-            modalTitle = 'Create new set';
-          } else {
-            primaryButtonText = 'Save';
-            modalTitle = 'Edit set';
+          switch (editModalType) {
+            case 'create':
+              primaryButtonLabel = 'Create';
+              modalTitle = 'Create new set';
+              break;
+            case 'edit':
+              thisSet = args[0];
+              primaryButtonLabel = 'Save';
+              modalTitle = 'Edit set';
+              break;
+            default:
+              break;
           }
 
           editModal = openModal({
             modal: {
               dismissable: true,
               title: modalTitle,
-              template: 'components/modal/editor/editModal/editModal.html',
-              controller: './editor/editModal/EditModelCtrl',
+              template: 'components/modal/editModal/editModal.html',
+              controller: './editModal/EditModalCtrl',
               size: 'lg',
               setData: thisSet,
               buttons: [{
                 classes: 'btn-success',
-                text: primaryButtonText,
+                text: primaryButtonLabel,
                 enabled: false,
                 click: function(e) {
                   editModal.close(e);
@@ -181,6 +138,7 @@ angular.module('readerboardPlannerApp')
                 text: 'Cancel',
                 enabled: true,
                 click: function(e) {
+                  $rootScope.$broadcast('refreshSetList');
                   editModal.dismiss(e);
                 }
               }]
@@ -190,7 +148,7 @@ angular.module('readerboardPlannerApp')
 
 
           editModal.result.then(function(event) {
-            editSet.apply();
+            callback.apply();
           });
         };
       }
