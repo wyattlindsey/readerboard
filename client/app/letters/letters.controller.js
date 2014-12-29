@@ -4,9 +4,6 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.sets = [];
   $scope.thisSet = {};
-  $scope.thisItem = {};
-
-
 
   /**
    * getSets - pull in sets from api endpoint
@@ -39,6 +36,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
     newSet.title = getUniqueTitle(newSet.title);
 
     $http.post('/api/sets', JSON.stringify(newSet)).success(function() {
+      $scope.newSet = false;
       getSets();
     });
 
@@ -53,7 +51,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
   var deleteSet = function() {
     var itemData;
 
-    itemData = $scope.thisItem;
+    itemData = $scope.thisSet;
     $http.delete('/api/sets/' + itemData.id).success(function() {
       getSets();
     });
@@ -82,8 +80,8 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    * @param id
    */
 
-  var editSet = function(thisSet) {
-    console.log('edit');
+  var editSet = function() {
+    console.log('editing');
   };
 
   /**
@@ -107,6 +105,6 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.openCreationModal = Modal.edit(createNewSet, $scope.thisSet, 'create');
   $scope.openEditSetModal = Modal.edit(editSet, $scope.thisSet, 'edit');
-  $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisItem);
+  $scope.openDeleteConfirmModal = Modal.confirm.delete(deleteSet, $scope.thisSet);
 
 });

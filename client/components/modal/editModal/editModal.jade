@@ -5,7 +5,7 @@
 .container-fluid.modal-contents(ng-controller='EditModalCtrl')
   .row.letter-set-title(editable-text='thisSet.title') {{thisSet.title}}
   .row.add-letter-controls
-    form.form-group.form-inline
+    form.form-group.form-inline(name='letterSetForm')
       input.form-control.character-field(type='text', placeholder='new character',
         ng-model='newLetter.character', ng-change='characterFieldChanged()')
       input.form-control.qty-field(type='text',
@@ -19,8 +19,8 @@
         li.set-item
           a.trash-icon(ng-click='deleteLetter($index)', ng-show='letter.showTrash')
             i.fa.fa-trash.pull-left
-          h2.list-character.col-xs-4.col-xs-push-2.col-md-2.col-md-push-0(editable-text='letter.character', onbeforesave='validateCharacter($data, $index)', onshow='xeditableShow(letter)', onhide='xeditableHide()') <b>{{letter.character}}</b>
+          h2.list-character.col-xs-4.col-xs-push-2.col-md-2.col-md-push-0(editable-text='letter.character', onbeforesave='validateCharacter($data)', onshow='xeditableShow(letter)', onhide='xeditableHide()') <b>{{letter.character}}</b>
           h2.list-qty.col-xs-4.col-xs-push-2.col-md-3.col-md-pull-0(editable-range='letter.qty', onshow='xeditableShow(letter)', onhide='xeditableHide()') {{letter.qty}}
 
-.modal-footer
-  button.btn(ng-repeat='button in modal.buttons', ng-class='button.classes', ng-click='button.click($event)', ng-bind='button.text', ng-disabled='!button.enabled')
+  .modal-footer
+    button.btn(ng-repeat='button in modal.buttons', ng-class='button.classes', ng-click='button.click($event)', ng-bind='button.text', ng-disabled='!button.enabled')
