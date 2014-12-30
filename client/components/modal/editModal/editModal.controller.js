@@ -3,12 +3,17 @@
 angular.module('readerboardPlannerApp')
     .controller('EditModalCtrl', function ($scope) {
 
-      // initialize new set data if creating new set
-      if ($scope.isNew) {
-        $scope.thisSet.letters = [];
-        $scope.thisSet.title = 'untitled set';
-      } else {
-        console.log($scope.thisSet);
+      switch ($scope.editModalType) {
+        case 'create':
+          // initialize new set data if creating new set
+          $scope.thisSet.letters = [];
+          $scope.thisSet.title = 'untitled set';
+          break;
+        case 'edit':
+          console.log('editing');
+          break;
+        default:
+          break;
       }
 
       $scope.newLetter = {
@@ -20,6 +25,13 @@ angular.module('readerboardPlannerApp')
       var currentlyEditedLetter = {};
       var lastQty = '1';
       $scope.addLetterButtonEnabled = false;
+
+
+      /**
+       * resetControls() - reset modal buttons' active/inactive states and whatever else
+       * needs to happen whenever a letter is added, removed, etc.
+       *
+       */
 
       var resetControls = function() {
         $scope.newLetter = {
@@ -35,8 +47,6 @@ angular.module('readerboardPlannerApp')
       };
 
 
-
-
       /**
        * addLetter
        *
@@ -44,7 +54,6 @@ angular.module('readerboardPlannerApp')
        * @param qty
        *
        */
-
 
       $scope.addLetter = function(character, qty) {
         if (character && qty ) {

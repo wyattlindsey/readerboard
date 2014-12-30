@@ -4,6 +4,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.sets = [];
   $scope.thisSet = {};
+  $scope.editModalType;
 
   /**
    * getSets - pull in sets from api endpoint
@@ -65,8 +66,6 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    * @param id
    */
 
-  // does this need to be $scope level?
-
   $scope.copySet = function(thisSet) {
     var copySetData = {};
     copySetData.title = thisSet.title;
@@ -81,10 +80,18 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
    */
 
   var editSet = function() {
-    $http.put('/api/sets/' + $scope.thisSet._id, JSON.stringify($scope.thisSet))
-        .success(function() {
-          getSets();
-        });
+
+    // I can't seem to update the thisSet.letters array with $http.post on thisSet - it just
+    // ends up giving me a bunch of the first element.  Maybe this is some mongoose weirdness.
+    // For now, I'm just deleting the existing set and pushing another one up there with the
+    // modified values
+
+    $http.delete('/api/sets/' + $scope.thisSet._id).success(function() {
+      $http.post('/api/sets/', JSON.stringify($scope.thisSet)).success(function() {
+            getSets();
+      });
+    });
+
   };
 
   /**

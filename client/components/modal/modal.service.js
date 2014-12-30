@@ -13,11 +13,16 @@ angular.module('readerboardPlannerApp')
         scope = scope || {};
         modalClass = modalClass || 'modal-default';
 
-        if (scope.modal.itemData)
+        if (scope.modal.itemData) {
           scope.thisSet = scope.modal.itemData;
+        }
 
-        if (scope.modal.isNew)
-          scope.isNew = true;
+
+        if (scope.modal.type) {
+          scope.editModalType = scope.modal.type;
+
+        }
+
 
         angular.extend(modalScope, scope);
 
@@ -100,18 +105,15 @@ angular.module('readerboardPlannerApp')
             var args = Array.prototype.slice.call(arguments),
                 editModal,
                 modalTitle,
-                isNew = false,                // when we're creating a new set vs editing an existing one
                 primaryButtonLabel;
 
             switch (editModalType) {
               case 'create':
                 primaryButtonLabel = 'Create';
                 modalTitle = 'Create new set';
-                isNew = true;
                 break;
               case 'edit':
                 angular.copy(args[0], thisSet);
-                thisSet.id = args[0]._id;
                 primaryButtonLabel = 'Save';
                 modalTitle = 'Edit set';
                 break;
@@ -126,7 +128,7 @@ angular.module('readerboardPlannerApp')
                 template: 'components/modal/editModal/editModal.html',
                 controller: './editModal/EditModalCtrl',
                 size: 'lg',
-                isNew: isNew,
+                type: editModalType,
                 itemData: thisSet,
                 buttons: [{
                   classes: 'btn-success',
