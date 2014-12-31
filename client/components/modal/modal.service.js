@@ -13,15 +13,12 @@ angular.module('readerboardPlannerApp')
         scope = scope || {};
         modalClass = modalClass || 'modal-default';
 
-        if (scope.modal.itemData) {
+        if (scope.modal.itemData)
           scope.thisSet = scope.modal.itemData;
-        }
 
 
-        if (scope.modal.type) {
+        if (scope.modal.type)
           scope.editModalType = scope.modal.type;
-
-        }
 
 
         angular.extend(modalScope, scope);

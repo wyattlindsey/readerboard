@@ -4,7 +4,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
 
   $scope.sets = [];
   $scope.thisSet = {};
-  $scope.editModalType;
+  $scope.editModalType = '';
 
   /**
    * getSets - pull in sets from api endpoint
@@ -39,7 +39,10 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
     $http.post('/api/sets', JSON.stringify(newSet)).success(function() {
       $scope.newSet = false;
       getSets();
-    });
+    })
+        .error(function(data) {
+          console.log(data);
+        });
 
   };
 
@@ -55,7 +58,10 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
     itemData = $scope.thisSet;
     $http.delete('/api/sets/' + itemData.id).success(function() {
       getSets();
-    });
+    })
+        .error(function(data) {
+          console.log(data);
+        });
   };
 
 
@@ -63,14 +69,20 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
   /**
    * copySet
    *
-   * @param id
+   * @param sourceSet
    */
 
-  $scope.copySet = function(thisSet) {
-    var copySetData = {};
-    copySetData.title = thisSet.title;
-    copySetData.letters = thisSet.letters;
-    createNewSet(copySetData);
+  $scope.copySet = function(sourceSet) {
+    $scope.thisSet = {};
+    $scope.thisSet.title = sourceSet.title;
+    $scope.thisSet.letters = [];
+    _.each(sourceSet.letters, function(letter) {
+      $scope.thisSet.letters.push({
+        'character': letter.character,
+        'qty': letter.qty
+      });
+    });
+    createNewSet();
   };
 
   /**
@@ -87,9 +99,7 @@ angular.module('readerboardPlannerApp').controller('LettersCtrl', function ($sco
     // modified values
 
     $http.delete('/api/sets/' + $scope.thisSet._id).success(function() {
-      $http.post('/api/sets/', JSON.stringify($scope.thisSet)).success(function() {
-            getSets();
-      });
+      $scope.copySet($scope.thisSet);
     });
 
   };
